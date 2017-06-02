@@ -51,7 +51,7 @@ module.exports.startHandlers = Alexa.CreateStateHandler(states.START, {
 });
 
 
-module.exports.startHandlers = Alexa.CreateStateHandler(states.GAME, {
+module.exports.gameHandlers = Alexa.CreateStateHandler(states.GAME, {
     StartSafeSpele() {
         this.emit(':ask', START_GAME, START_GAME);
     },
@@ -66,7 +66,7 @@ module.exports.startHandlers = Alexa.CreateStateHandler(states.GAME, {
     },
    
     Unhandled() {
-        this.emitWithState('Start');
+        this.emitWithState('StartSafeSpele');
     },
 
 });
