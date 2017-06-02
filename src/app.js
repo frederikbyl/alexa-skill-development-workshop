@@ -60,11 +60,11 @@ module.exports.gameHandlers = Alexa.CreateStateHandler(states.GAME, {
     },
     
     NumberGuessIntent() {
-        if(this.event.request.intent.slots.number.value < this.attributes.secretNumber.value) {
+        if(this.event.request.intent.slots.number.value < this.attributes.secretNumber) {
             //too low
             speech = `Too low! Guess again?`;
             this.emit(':ask', speech, speech);
-        } else  if(this.event.request.intent.slots.number.value > this.attributes.secretNumber.value) {
+        } else if(this.event.request.intent.slots.number.value > this.attributes.secretNumber) {
             //too low
             speech = `Too high! Guess again?`;
             this.emit(':ask', speech, speech);
