@@ -1,3 +1,5 @@
+const Alexa = require('alexa-sdk');
+
 const WELCOME_MESSAGE = 'Welcome to the High Low guessing game. You have played 0 times. Would you like to play?';
 const HELP_MESSAGE = 'Would you like me to say Hello World to you?';
 const EXIT_SKILL_MESSAGE = 'Thank you for trying out this skill! Goodbye!';
