@@ -15,7 +15,7 @@ const states = {
 module.exports.handlers = {
     LaunchRequest() {
         this.handler.state = states.START;
-         this.emitWithState('Start');
+        this.emitWithState('Start');
     },
     Unhandled() {
         this.handler.state = states.START;
@@ -55,16 +55,27 @@ module.exports.startHandlers = Alexa.CreateStateHandler(states.START, {
 
 module.exports.gameHandlers = Alexa.CreateStateHandler(states.GAME, {
     StartSafeSpele() {
+        this.attributes.secretNumber = 10;
         this.emit(':ask', START_GAME, START_GAME);
     },
     
     NumberGuessIntent() {
-
-        
-        this.emit('NumberGuessIntent', () => {
-            speech = `Higher ${this.attributes.helloWorldCount} times. Would you like me to say Hello World again?`;
+        if(this.event.request.intent.slots.number.value < this.attributes.secretNumber) {
+            //too low
+            speech = `Too low! Guess again?`;
             this.emit(':ask', speech, speech);
-        });
+        } else  if(this.event.request.intent.slots.number.value > this.attributes.secretNumber) {
+            //too low
+            speech = `Too high! Guess again?`;
+            this.emit(':ask', speech, speech);
+        } else {
+            //right!
+            this.handler.state = states.START;
+            speech = `Correct! Would you like to play again?`;
+            this.emit(':ask', speech, speech);
+        }
+        
+       
     },
    
     Unhandled() {
@@ -72,13 +83,3 @@ module.exports.gameHandlers = Alexa.CreateStateHandler(states.GAME, {
     },
 
 });
-
-module.exports.generalHandlers = {
-    CheckSecret(callback) {
-        if (typeof this.attributes.secretNumber === 'undefined') {
-            this.attributes.secretNumber = 20;
-        }
-
-        this.event.request.intent.slots.number.value;
-        callback();
-    }};
