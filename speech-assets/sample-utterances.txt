@@ -1,0 +1,3 @@
+GameIntent {number}
+GameIntent the number is {number}
+GameIntent {number}
