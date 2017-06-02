@@ -56,10 +56,10 @@ module.exports.startHandlers = Alexa.CreateStateHandler(states.GAME, {
         this.emit(':ask', START_GAME, START_GAME);
     },
     
-    GameIntent() {
+    NumberGuessIntent() {
 
         
-        this.emit('GameIntent', () => {
+        this.emit('NumberGuessIntent', () => {
             speech = `Higher ${this.attributes.helloWorldCount} times. Would you like me to say Hello World again?`;
             this.emit(':ask', speech, speech);
         });
